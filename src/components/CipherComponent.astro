@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+const { text } = Astro.props;
+const texts = await getCollection("text");
+const cleartext = texts.find(
+  (t) => t.slug.includes(text) && !!t.data.cleartext
+);
+const ciphertext = texts.find(
+  (t) => t.slug.includes(text) && !t.data.cleartext
+);
+---
+
+<div id="cipher">
+  {ciphertext?.body}
+</div>
+
+<div id="clear" hidden>
+  {cleartext?.body}
+</div>
+
+<button class="alert">aaaa</button>
+
+<script>
+  const cipher = document.getElementById("cipher");
+  const clear = document.getElementById("clear");
+  const buttons = document.querySelectorAll("button.alert");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (cipher) {
+        cipher.hidden = !cipher?.hidden;
+      }
+      if (clear) {
+        clear.hidden = !clear?.hidden;
+      }
+    });
+  });
+</script>

@@ -1,9 +1,18 @@
 ---
-console.log('Astro!');
+import MySiteLayout from "../layouts/MySiteLayout.astro";
+import { getCollection } from "astro:content";
+
+const allSecPosts = await getCollection("sec");
 ---
 
-<html>
-    <body>
-        <h1>Hello, World</h1>
-    </body>
-</html>
+<MySiteLayout>
+  <ul>
+    {
+      allSecPosts.map((post) => (
+        <li>
+          <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</MySiteLayout>
