@@ -14,7 +14,9 @@ import MyHeader from "../components/MyHeader.astro";
   >
     <MyHeader title="blog.urosdragojevic" />
     <div class="flex justify-center min-h-screen">
-      <slot />
+      <div class="container mx-auto prose prose-invert">
+        <slot />
+      </div>
     </div>
     <MyFooter title="Trademark 2023" />
   </body>

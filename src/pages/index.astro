@@ -8,65 +8,28 @@ const nonDraftOpsPosts = await getCollection("ops", ({ data }) => !data.draft);
 ---
 
 <MySiteLayout>
-  <div class="container mx-auto bg-black">
-    <div class="flex flex-1 flex-row">
-      <div
-        class="bg-black grow flex justify-center items-center hover:bg-gray-500"
-      >
-        <span>Dev</span>
-      </div>
-      <div
-        class="bg-black grow flex justify-center items-center hover:bg-gray-500"
-      >
-        <span>Sec</span>
-      </div>
-      <div
-        class="bg-black grow flex justify-center items-center hover:bg-gray-500"
-      >
-        <span>Ops</span>
-      </div>
-    </div>
-    <h1>Posts:</h1>
-    <div class="flex justify-between h-96">
-      <div class="flex-1 grow justify-start">
-        <ul>
-          {
-            nonDraftDevPosts.map((post) => (
-              <li>
-                <a href={`${post.collection}/${post.slug}`}>
-                  {post.data.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="flex-1 grow justify-start">
-        <ul>
-          {
-            nonDraftSecPosts.map((post) => (
-              <li>
-                <a href={`${post.collection}/${post.slug}`}>
-                  {post.data.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="flex-1 grow justify-start">
-        <ul>
-          {
-            nonDraftOpsPosts.map((post) => (
-              <li>
-                <a href={`${post.collection}/${post.slug}`}>
-                  {post.data.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </div>
+  <h1>Posts</h1>
+  <ul>
+    {
+      nonDraftDevPosts.map((post) => (
+        <li>
+          <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+    {
+      nonDraftSecPosts.map((post) => (
+        <li>
+          <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+    {
+      nonDraftOpsPosts.map((post) => (
+        <li>
+          <a href={`${post.collection}/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
 </MySiteLayout>
