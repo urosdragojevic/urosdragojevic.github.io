@@ -1,13 +1,15 @@
 ---
 import MyFooter from "../components/MyFooter.astro";
 import MyHeader from "../components/MyHeader.astro";
+
+const { title } = Astro.props;
 ---
 
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog</title>
+    <title>{title}</title>
   </head>
   <body
     class="bg-gradient-to-t from-slate-900 to-slate-800 from-80% text-white"

@@ -7,7 +7,7 @@ const nonDraftSecPosts = await getCollection("sec", ({ data }) => !data.draft);
 const nonDraftOpsPosts = await getCollection("ops", ({ data }) => !data.draft);
 ---
 
-<MySiteLayout>
+<MySiteLayout title="Blog">
   <h1>Posts</h1>
   <ul>
     {
