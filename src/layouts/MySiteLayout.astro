@@ -4,9 +4,18 @@ import MyHeader from "../components/MyHeader.astro";
 ---
 
 <html>
-  <body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+  </head>
+  <body
+    class="bg-gradient-to-t from-slate-900 to-slate-800 from-80% text-white"
+  >
     <MyHeader title="blog.urosdragojevic" />
-    <div><slot /></div>
+    <div class="flex justify-center min-h-screen">
+      <slot />
+    </div>
     <MyFooter title="Trademark 2023" />
   </body>
 </html>

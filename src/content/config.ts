@@ -8,6 +8,7 @@ const secCollection = defineCollection({
         title: z.string(),
         author: z.string(),
         date: z.date(),
+        draft: z.boolean()
     }),
 });
 

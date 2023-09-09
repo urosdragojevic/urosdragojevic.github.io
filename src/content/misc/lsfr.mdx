@@ -1,0 +1,36 @@
+# LFSR
+
+Implemented using flip-flops, they are PRNGs.
+
+XOR on bits is actually mod 2 arithmetic.
+
+1 ^ 0 = 1
+0 ^ 0 = 0
+1 ^ 1 = 0
+0 ^ 1 = 1
+
+1 % 2 = 1
+0 % 2 = 0
+2 % 2 = 0
+1 % 2 = 1
+
+1 1 1 = 7
+1 0 1 = 5
+---------
+0 1 0 = 2
+
+XOR'ing is subtraction?
+
+## DES
+
+- 64 bit blocks
+- split in half,
+- R0, k1 -> f function -> XOR -> L0 -> R1
+- R0 -> L1
+
+### F function
+
+- Expansion
+- XOR with k
+- S-boxes
+- Permutation

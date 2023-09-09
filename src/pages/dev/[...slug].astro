@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import MySiteLayout from "../../layouts/MySiteLayout.astro";
-import PostLayout from "../../layouts/PostLayout.astro";
+import { getCollection } from "astro:content";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("sec");
+  const blogEntries = await getCollection("dev");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -16,7 +15,7 @@ const { Content } = await entry.render();
 ---
 
 <MySiteLayout>
-  <article class="prose text-slate-400">
+  <article class="prose text-slate-400 flex justify-center">
     <Content />
   </article>
 </MySiteLayout>

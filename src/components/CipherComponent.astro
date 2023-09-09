@@ -8,17 +8,24 @@ const cleartext = texts.find(
 const ciphertext = texts.find(
   (t) => t.slug.includes(text) && !t.data.cleartext
 );
+
+const { Content: CipherContent } = await ciphertext?.render();
+const { Content: ClearContent } = await cleartext?.render();
 ---
 
-<div id="cipher">
-  {ciphertext?.body}
+<div class="bg-slate-800">
+  <div id="cipher" class="text-sky">
+    <CipherContent />
+  </div>
+
+  <div id="clear" class="text-green" hidden>
+    <ClearContent />
+  </div>
 </div>
 
-<div id="clear" hidden>
-  {cleartext?.body}
+<div class="container bg-pink-600 rounded flex justify-center">
+  <button class="alert">Decrypt</button>
 </div>
-
-<button class="alert">aaaa</button>
 
 <script>
   const cipher = document.getElementById("cipher");
@@ -32,6 +39,11 @@ const ciphertext = texts.find(
       }
       if (clear) {
         clear.hidden = !clear?.hidden;
+      }
+      if (cipher?.hidden) {
+        button.textContent = "Encrypt";
+      } else {
+        button.textContent = "Decrypt";
       }
     });
   });
