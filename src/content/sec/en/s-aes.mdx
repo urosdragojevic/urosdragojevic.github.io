@@ -1,0 +1,46 @@
+---
+title: 'Simplified AES'
+author: 'Uros Dragojevic'
+date: 2023-09-10
+draft: true
+---
+# {frontmatter.title}
+
+## By {frontmatter.author}, {frontmatter.date}
+
+
+### Characteristics
+
+- key size: 16-bit
+- block size: 16-bit
+- \# of rounds: 2
+
+# AES algo:
+
+- S-box
+- Shift Rows
+- Mix Columns
+- Add round key
+- key expansion
+
+# S-box
+
+Steps:
+
+- associate each bit in the nibble to a polynomial in GF(2^4)
+
+ex.1 0101 = x^2 + 1
+
+ex.2 1011 = x^3 + x + 1
+
+ex.3 1000 = x^3
+
+- invert the polynomial using the polynomial ```x^4 + x + 1```
+
+inverse = A(x) * B'(x) = 1 mod x^4 + x + 1
+
+The inverse is called B'(x). 
+
+- inverse is then run through the affine mapping
+
+Affine mapping function multiplies the B' with a predefined 4x4 matrix and a predefined vector is then added. Addition and multiplication is done mod 2.
