@@ -1,0 +1,499 @@
+---
+title: 'TypeScript data types'
+author: 'Uros Dragojevic'
+date: 2022-05-07
+draft: false
+abstract: 'TypeScript is a syntactic superset of JavaScript, adding additional syntax on top of vanilla JavaScript allowing us to statically check types. It allows us to catch type errors early, while writing the code, instead of the user encountering bugs at runtime. It brings JavaScript closer to statically typed languages like Java and others, while still keeping the interpreted nature of JavaScript.'
+categories: ['development']
+---
+
+## Primitive & special types
+
+There are 7 ***primitive*** types:
+- `string`
+- `number`
+- `boolean`
+- `bigint`
+- `symbol`
+- `undefined`
+- `null`
+
+TypeScript also has ***special*** types, one of which specifies any type, appropriately named `any`.
+
+Special types:
+- `any`
+- `void` - *output type of functions that return no value*
+- `never` - *output type of functions that do not return at all, e.g. they always throw an Error*
+
+> Type `any` allows you to call any property on an object, call it as a function etc. It is essentially an override for the type checker, so it lets you write code as if you were using plain JavaScript, and is therefore really powerfull. However, it somewhat defeats the purpose of using TypeScript in the first place, so it should be used sparingly. See [Generics](#generics) for further details on this topic.
+
+The code below is all valid TypeScript, because type `any` is declared.
+
+```typescript
+let obj: any = { x: 0 };
+// None of the following lines of code will throw compiler errors.
+// Using `any` disables all further type checking, and it is assumed 
+// you know the environment better than TypeScript.
+obj.foo();
+obj();
+obj.bar = 100;
+obj = "hello";
+const n: number = obj;
+```
+
+> Source: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
+
+***Anything that is not a primitive or special type is considered to be a subclass of the `object` type.***
+
+We will cover some of the built-in object types next.
+
+### Arrays
+
+Arrays are also supported by TypeScript, and behave much the same way as they do in JavaScript.
+The key difference is that we can specify the type of data that goes in the array, and reject attempts to add elements of a different type.
+
+For example, the below code is entirely valid JavaScript code, however the TypeScript type checker does not allow it:
+
+  ```javascript
+// javascript
+let nums[] = [1, 2, 3];
+
+nums[3] = 'a'; // Valid.
+  ```
+
+  ```typescript
+// typescript
+let nums: number[] = [1, 2, 3];
+
+nums[3] = 'a'; // TypeError: Type 'string' is not assignable to type 'number'.
+  ```
+
+### Tuples
+
+Another data structure similar to Arrays is the _*tuple*_.
+Tuples are data structures that represent a **finite ordered list** (sequence) of elements.
+In JavaScript tuples are defined using the object syntax, but in TypeScript they have dedicated syntax.
+
+```typescript
+// Tuples can have n elements.
+let tup: [number, string] = [1, "JavaScript"];
+let tup2: [number, string, boolean] = [2, "TypeScript", true];
+
+// There are even arrays of tuples.
+var employee: [number, string][];
+employee = [[1, "Steve"], [2, "Bill"], [3, "Jeff"]];
+
+// Type checker sees to it that you cannot insert a value of the wrong type into the tuple.
+tup = [2, 5]; // TypeError: Type 'number' is not assignable to type 'string'.
+```
+
+### Functions
+
+Functions are arguably the most powerful language construct in JavaScript. 
+
+TypeScript adds to their power by allowing us to specify types of both input and output for functions, as well as other useful features for working with functions.
+
+- Function argument type annotations
+
+We can add type annotations after each argument to declare the types of arguments the function accepts.
+Argument types are written after the argument name just like types of variables:
+
+```typescript
+// Argument type annotation
+function greet(name: string) {
+  console.log("Hello, " + name.toUpperCase() + "!!");
+}
+```
+
+When a type annotation is provided in the function definition, arguments that are passed to that function will be type checked before the function is called:
+
+```typescript
+// Would be a runtime error if executed!
+greet(42); // Error: Argument of type 'number' is not assignable to parameter of type 'string'.
+
+// Forgot to pass argument to function.
+greet(); // Error: Expected 1 arguments, but got 0.
+```
+
+> Even if you don’t have type annotations on your arguments, TypeScript will still check that you passed the right number of arguments.
+
+- Optional arguments
+
+But if we don't want to pass the `name` argument every time and want a default implementation of `greet()` for when we do not know the user's name?
+We can specify that a function argument is optional by appending the `?` operator after the argument name:
+
+```typescript
+// 'name' argument is optional.
+function greet(name?: string) {
+  console.log("Hello " + name.toUpperCase() + "!!");
+}
+
+// Now greet() can be called without passing the 'name' argument.
+greet(); // Valid. Prints "Hello !!".
+```
+
+- Default argument value
+
+We can also provide a default value for the argument if none is provided by the user:
+
+```typescript
+function greet(name: string = "Bob") {
+  console.log("Hello " + name.toUpperCase() + "!!");
+}
+
+// greet() can still be called without passing the 'name' argument.
+greet(); // Prints "Hello Bob!!"
+```
+
+- Function type expressions
+
+Like in JavaScript, you can assign functions to variables, pass them as arguments or return them from other functions.
+
+TypeScript provides *function type expressions* so we can control the types of the arguments and return values of the function we are passing around.
+Basically, we are specifying the signature that the provided function must match.
+
+We can use arrow notation to specify the function type:
+
+```typescript
+// We need a function 'fn' that takes a 'string' and returns a 'string'.
+function printMessage(name: string, fn: (s: string) => string) {
+    // Here we pass the provided 'name' to 'fn' and print the result to the console.
+    console.log(fn(name));
+}
+
+// This function takes an argument of type 'string'...
+function provideMessage(user: string) {
+    // ...and returns a 'string' as well. It matches the '(string) => string' function type specified for 'fn' above.
+    return 'This is a message to ' + user;
+}
+
+// We pass the name 'Alice' and our 'provideMessage' function.
+printMessage('Alice', provideMessage); // Outputs: 'This is a message to Alice'.
+
+// We can also pass a lambda expression instead of a function name that matches the 'fn' function type.
+printMessage('Alice', (s) => s += ' & Bob also'); // Outputs: 'Alice & Bob also'.
+```
+
+> There is a lot more you can do with functions in TypeScript. To learn more, check out: [More on Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)
+
+### Unions & Enums
+
+We've seen how we can specify the type for a function parameter, but what happens when the function can take in multiple types for the same parameter?
+For example, our `greet` method might need to greet people as well as androids, whose names are numbers.
+We can rewrite the function using the _union_ construct to take in the name as a `number` too.
+
+```typescript
+// Parameter type annotation using Unions
+function greet(name: string | number) { // Unions are written using the pipe operator
+  // We can check the type of the passed parameter using the typeof operator
+  if (typeof name === "string")
+    console.log("Hello, " + name.toUpperCase() + "!!");
+  if (typeof name === "number")
+    console.log("Hello, number " + name + "!!");
+}
+```
+
+Enums specify a list of predetermined values.
+Common examples are days in a week, or months in a year.
+
+
+```typescript
+enum Day {
+  Monday = 1,
+  Tuesday = 2,
+  Wednesday = 3,
+  Thursday = 4,
+  Friday = 5,
+  Saturday = 6,
+  Sunday = 7
+}
+```
+
+Numeric values on the right of each enum value are called _initializers_ and they represent the value that gets inserted when you specify an enum.
+In this case they are all of type *number*, but they can be strings and other types, and you can also mix and match different types of initializers in a single enum.
+
+You can also leave out the initializer completely, in which case you get the default value, i.e. the index of the element in the enum.
+
+Enums can be used in the following way:
+
+```typescript
+console.log("Tuesday is the " + Day.Tuesday + "th day of the week in Serbia."); 
+// Output: Tuesday is the 2th day of the week in Serbia.
+```
+  
+### Type guards & Narrowing
+
+#### `typeof` operator
+
+We can use the `typeof` operator to introduce *type guards* in our code.
+TypeScript compiler is smart enough to deduce that the type of the argument is *narrowed* inside the `if (typeof ...)` block.
+
+```typescript
+// 'padding' can either be of type 'number' or 'string'. We might want to process numbers different from strings.
+function padLeft(padding: number | string, input: string) {
+  if (typeof padding === "number") { // Type guard
+    return " ".repeat(padding) + input; // 'padding' is considered a 'number' here.
+  }
+  return padding + input; // And considered a 'number | string' here.
+}
+```
+
+> You can learn more about _narrowing_ here: [Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+### Operators, Conditionals, Loops, Comments, Exceptions, Equality
+
+All operators, conditionals and loops you know and love from JavaScript are supported in TypeScript.
+Comments are also written the same way as in JavaScript.
+Exceptions can be thrown using the `throw` keyword and caught in the `try { ... } catch{ ... }` block, just like in JavaScript.
+Strict and loose equality are present, the same as in JavaScript.
+
+### Classes
+
+Let's quickly remember what we learned about classes in JavaScript.
+
+```typescript
+class Car {
+    // Classes can define fields.
+    // They can have public, protected or private access.
+    private year: number;
+    private engineOn: boolean;
+
+    // Classes can have constructors, methods that are called when the 'new' keyword is used.
+    constructor(year: number) {
+        this.year = year;
+    }
+
+    // Classes can have methods.
+    public start() {
+        this.engineOn = true;
+    }
+
+    public isEngineOn(): boolean {
+        return this.engineOn;
+    }
+}
+
+// We can now use the 'new' keyword to create an instance of the Car class.
+let mazda = new Car(2014);
+// And we can call methods on it.
+console.log(mazda.isEngineOn()); // false
+mazda.start();
+console.log(mazda.isEngineOn()); // true
+
+// private access makes it so we cannot access those members from outside the Car class.
+console.log(mazda.year); // Error: Property 'year' is private and is only accessible from the 'Car' class.
+```
+> For an overview on classes see the *Classes* [TypeScript Cheatsheet](https://www.typescriptlang.org/cheatsheets/).
+
+
+### Interfaces
+
+TypeScript builds on the OOP capabilities of JavaScript by introducing *interfaces*, which are similar to classes but have some significant differences which make them more suited to certain scenarios, especially when it comes to defining contracts in our code.
+
+```typescript
+interface Vehicle {
+    // Interfaces can also define fields, but they are always public. 
+    private year: number; // Error: 'private' modifier cannot apply to a type member.
+
+    make: string;
+
+    price?: number; // Optional field.
+
+    // Interfaces can define methods as well, but cannot provide an implementation.
+    // They are used to specify all the properties that an object needs to have in order to fulfill the contract defined by the interface.
+    // It is up to the concrete class or passed anonymous object to provide its implementation for the methods of the interface.
+    drive(destination: string): boolean;
+}
+
+function roadTrip(destination: string, vehicle: Vehicle) {
+    return vehicle.drive(destination);
+}
+
+// Vehicle cannot be instantiated.
+console.log(roadTrip("Paris", new Vehicle()); // Error: 'Vehicle' only refers to a type, but is used as a value here.
+
+// However, we can provide any object that matches the Interface contract, i.e. contains the 'make' or 'drive' members. 
+console.log(roadTrip("Paris", { make: "Ford", drive: (dest) => true }));
+```
+> Interfaces are very useful when wanting to define the minimum requirements in terms of the structure of an object that will make the code work.
+> Like in the `roadTrip()` example above, by passing the interface to the function we are not limiting ourselves to a single concrete implementation like `Car` or `Truck`.
+> Any object with the correct structure can be passed and the code will work.
+> This promotes code reuse since other classes that match the interface can be used without rewriting the function.
+
+
+
+We can specify that a class implements an interface by using the `implements` keyword.
+In this case, the class **must** contain the properties that are defined in the interface it implements.
+So let's make our `Car` class implement the `Vehicle` interface, since it is a type of vehicle after all.
+We must make sure to include all the properties from the `Vehicle` interface, otherwise we will get errors.
+
+
+```typescript
+class Car implements Vehicle { // Error: Class 'Car' incorrectly implements interface 'Vehicle'. Property 'drive' is missing in type 'Car' but required in 'Vehicle'.
+
+    make: string; // Important: 'make' or 'drive' cannot be declared private. Interface properties are public by design, so the class implementation must match that.
+
+    public start() {
+        this.engineOn = true;
+    }
+}
+```
+Interfaces also support *inheritance* of other interfaces.
+When implementing an interface that extends a different interface, we must provide implementations for properties of **both** interfaces.
+
+```typescript
+interface Food {
+  calories: number
+}
+
+interface FoodProduct extends Food {
+  price: number
+}
+
+class Snickers implements FoodProduct {
+  calories = 100;
+  price = 70;
+}
+```
+
+> For an overview on interfaces see the *Interfaces* [TypeScript Cheatsheet](https://www.typescriptlang.org/cheatsheets/).
+
+### Type aliases
+
+We can also define our own custom types.
+This is called *type aliasing*.
+Instead of defining it as an interface, we could have defined `Vehicle` as a type alias and our code would work much in the same way as before.
+
+```typescript
+type Vehicle = {
+  make: string,
+  drive: (dest: string) => boolean
+}
+
+class Truck implements Vehicle {
+    make = "Porsche";
+    drive = (dest) => {
+        console.log(`Driving to ${dest}`);
+        return true;
+    }
+}
+
+roadTrip('Vegas', new Truck()); // Output: 'Driving to Vegas'
+```
+
+Some things that type aliases allow and interfaces don't, is mapping to primitive types and mapping unions, so the below type aliases are valid, whereas interfaces would throw an Error.
+
+```typescript
+type Word = string;
+
+// interface Word = string; // Error: 'string' only refers to a type, but is used as a value here.
+
+type ForEating = Food | FoodProduct;
+
+// interface ForEating = Food | FoodProduct; // Error: 'Food' only refers to a type but is used a value here.
+```
+
+> There are more nuanced differences between type aliases and interfaces, but they are out of scope for this lesson.
+> If you are interested in learning more, please check out the *Types* [TypeScript Cheatsheet](https://www.typescriptlang.org/cheatsheets/).
+> There are also various blog posts that go in-depth on the topic.
+
+## Generics
+
+Statically typed languages have the concept of *generics*, which TypeScript also supports.
+Generics are very useful since they promote code reuse, but also allow the TypeScript type checker to display the correct properties depending on the type of the variable.
+Let's take a look at an example of generics that will hopefully make this clearer if you didn't cross paths with generics before.
+
+### Generics example - *identity*
+
+We are going to be implementing the `identity` function, which is considered a *Hello World* example for generics.
+All the function does is return the argument it receives back to the caller.
+
+```typescript
+// Accept a number from the user and return it.
+function identity(arg: number): number {
+  return arg;
+}
+```
+
+So far so good.
+Now let's say we want to return the identity of a `string` too.
+We would have to *overload* the `identity` function to accept a string argument.
+
+You can start to see the potential problem with this approach.
+We would need a separate identity function for every type of literal or object we want to use `identity` on.
+But the functions would all do the same thing: return the argument to the caller, so this seems like a lot of unnecessary copy-pasting.
+
+### Approach #1 - Use `any` as the argument type
+
+There is a way we could get around this problem and it is by using the `any` type. So we can rewrite the `identity` functions as follows:
+
+```typescript
+// Accept 'any' as the argument and return it.
+function identity(arg: any): any {
+    return arg;
+}
+
+// Now we can pass a 'number', but also a 'string' without creating a separate function.
+let num = identity(5);
+let hero = identity('Sam Vimes');
+
+console.log(typeof num); // Outputs: 'number'
+console.log(typeof hero); // Outputs: 'string'
+```
+> Types are returned correctly here, since the actual objects stored in memory are of type *number* and *string* respectively and `typeof` is evaluated at runtime.
+> However, the type of the pointers `num` and `hero` are of type *any*, which means that only properties of type *any* are known to the TypeScript compiler at compile time.
+
+There is one big drawback with using the `any` type, and that is using the `any` type.
+Since `any` can specify any possible type value, there is no way for the type checker to determine if we are using the variable in the correct way.
+It leads to problems like calling a property that does not exists on the type of the actual object we have.
+
+
+```typescript
+console.log(hero.length); // Ok. Outputs: 9
+console.log(num.length);    // Oops! Outputs: undefined
+```
+> There are legitimate cases, especially in real projects, where the `any` keyword can be extremely useful and even necessary.
+> We just need to be aware that the `any` keyword is essentially the programmer saying to the type checker: "I know the types of objects I am working with here, I don't need your help."
+> It is an override for the static type checking provided by TypeScript and can lead to the same runtime errors that plague regular JavaScript code.
+ 
+### Approach #2 - Use Generics
+
+Generics are a solution to the problem.
+It allows us to insert a placeholder for the type when we define the function and delay the definition of the type of the argument to when the function is called. This way we can reuse the same logic for various types.
+Unlike the `any` approach, we can now use the variables as if they were of their specific type and not of type `any`.
+It is like we are saying to the function: *"We are going to pass you an argument of a type you can call T for now. Later when we call you, we will tell you what the actual type of T is."*
+
+```typescript
+// Specify the generic type in the angle brackets after the name of the function. This is called a generic type parameter, since we are parameterizing the function call with the type.
+// Capital single letters are used to specify generic types by convention.
+function identity<T>(arg: T): T {
+    return arg;
+}
+
+// When we call the function, we specify 'string' as the generic type parameter, i.e. that 'T' should be considered a 'string'.
+// Now the variable 'hero' is of type 'string' and not of type 'any'.
+// We can access all properties of the 'string' type and are not limited to those of type 'any'.
+let hero = identity<string>('Sam Vimes');
+
+// We can also let TypeScript infer the generic type parameter to be 'number' here.
+let num = identity(5);
+
+// Same as before.
+console.log(typeof num); // Outputs: 'number'
+console.log(typeof hero); // Outputs: 'string'
+
+console.log(hero.length);
+// However, this time, the TypeScript type checker shows us an error immediately, if we try to use a property that does not exist.
+console.log(num.length); // Error: Property 'length' does not exist on type 'number'.
+```
+> Try writing both examples from above (`identity(any)` and `identity<T>(T)`) in your IDE.
+>
+> Now try typing `hero.` and see what the IDE autocomplete suggestions are.
+>
+> Notice how the IDE autocomplete suggests properties of the `string` type if you use generics, and how they are missing from the autocomplete menu in the `any` case.
+> Better autocomplete is another benefit of the generics approach.
+
+## Resources/Further Reading
+- [TS Playground](https://www.typescriptlang.org/play) - *for playing around with TypeScript in the browser, without having to install it.*
+- [Basarat's e-book](https://basarat.gitbook.io/typescript/) - *more in-depth look into TypeScript in e-book form.*
+- [TypeScript Cheatsheet](https://www.typescriptlang.org/cheatsheets/) - *concise and easy-to-use.*

@@ -1,1 +1,32 @@
-<!-- TODO: Implement Layout to use in md posts -->
+---
+import Categories from "../components/Categories.astro";
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date);
+
+const { lang } = Astro.params;
+---
+
+<article>
+    <header class="flex justify-between flex-col md:flex-row">
+        <hgroup class="flex flex-col">
+            <h1 class="mb-0">{frontmatter.title}</h1>
+            <p>
+                By&nbsp;<cite class="author">
+                    <a
+                        rel="author"
+                        href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
+                        >{frontmatter.author}</a
+                    >
+                </cite>&nbsp;on&nbsp;
+                <time pubdate datetime={frontmatter.date}
+                    >{date.toLocaleDateString(lang)}</time
+                >
+            </p>
+        </hgroup>
+        <section>
+            <Categories categories={frontmatter.categories} />
+        </section>
+    </header>
+    <p class="lead">{frontmatter.abstract}</p>
+    <slot />
+</article>
