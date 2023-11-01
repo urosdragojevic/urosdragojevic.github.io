@@ -1,0 +1,19 @@
+---
+import { languages } from "../i18n/ui";
+const { languageLabel } = Astro.props;
+---
+
+<nav class="font-mono flex flex-row">
+    <span class="flex items-center">{languageLabel}:</span>
+    <ul class="flex flex-row list-none m-0 lg:m-0 p-0 lg:p-0">
+        {
+            Object.entries(languages).map(([lang, label]) => (
+                <li>
+                    <a class="mr-2" href={`/${lang}`}>
+                        {label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>

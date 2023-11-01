@@ -1,0 +1,34 @@
+---
+import Categories from "./Categories.astro";
+import { useTranslations } from "../i18n/utils";
+
+const { title, date, abstract, link, categories, lang } = Astro.props;
+const t = useTranslations(lang as "en" | "sr");
+---
+
+<article
+    class="border border-black dark:border-white p-8 flex flex-col justify-between"
+>
+    <header class="flex flex-col md:flex-row justify-between">
+        <hgroup>
+            <h2 class="my-0 lg:my-0">{title}</h2>
+            <p>
+                {t("articleCard.publishedOn")}
+                <time
+                    pubdate
+                    datetime={date.toDateString()}
+                    title={date.toDateString()}
+                >
+                    {date.toLocaleDateString(lang)}
+                </time>
+            </p>
+        </hgroup>
+        <Categories categories={categories} />
+    </header>
+    <p>
+        {abstract}
+    </p>
+    <a href={link}>
+        {t("articleCard.readMore")}
+    </a>
+</article>
