@@ -1,0 +1,24 @@
+---
+title: '`noopener norefferer` browser vulnerability - tabnabbing'
+author: 'Uros Dragojevic'
+date: 2023-11-01
+draft: true
+abstract: 'An attack known as tabnabbing is possible using the `window.opener` attribute available in the browser. `noopener norefferer` is a way to prevent the attack.'
+categories: ['security']
+---
+
+[Stack overflow](https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable)
+[OWASP](https://owasp.org/www-community/attacks/Reverse_Tabnabbing)
+
+## `window.href.location` vs `window.open()`
+
+There are two approaches to redirecting the user. Both `window.href.location` and `window.open()` can be used.
+
+For redirects in the same tab, the former seems to be the better solution, since `window.open()` opens a new window/tab.
+
+The behaviour depends on the browser's implementation. Some browsers allow the user to configure the preferred behaviour, whether it opens links in a new window, tab or popup.
+
+For new tab opening, `target='_blank'` attribute needs to be set, but it seems that this too does not guarantee the behaviour.
+
+When using `window.open()` the `noopener` and `noreferrer` attributes need to be set. If not set, the opener is available to the newly opened page, however in Firefox, access to it is restricted (maybe it's safe by default, still better to not take the chance I guess).
+Access to the `opener` object is restricted when the request is cross-origin, same origin has access to the entire object!
