@@ -6,29 +6,27 @@ const date = new Date(frontmatter.date);
 const { lang } = Astro.params;
 ---
 
-<main class="max-w-3xl md:mx-auto mb-10">
-    <article>
-        <header class="flex justify-between flex-col md:flex-row">
-            <hgroup class="flex flex-col">
-                <h1 class="mb-0">{frontmatter.title}</h1>
-                <p>
-                    By&nbsp;<cite class="author">
-                        <a
-                            rel="author"
-                            href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
-                            >{frontmatter.author}</a
-                        >
-                    </cite>&nbsp;on&nbsp;
-                    <time pubdate datetime={frontmatter.date}
-                        >{date.toLocaleDateString(lang)}</time
+<article>
+    <header class="flex justify-between flex-col md:flex-row">
+        <hgroup class="flex flex-col">
+            <h1 class="mb-0">{frontmatter.title}</h1>
+            <p>
+                By&nbsp;<cite class="author">
+                    <a
+                        rel="author"
+                        href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
+                        >{frontmatter.author}</a
                     >
-                </p>
-            </hgroup>
-            <section>
-                <Categories categories={frontmatter.categories} />
-            </section>
-        </header>
-        <p class="lead">{frontmatter.abstract}</p>
-        <slot />
-    </article>
-</main>
+                </cite>&nbsp;on&nbsp;
+                <time pubdate datetime={frontmatter.date}
+                    >{date.toLocaleDateString(lang)}</time
+                >
+            </p>
+        </hgroup>
+        <section>
+            <Categories categories={frontmatter.categories} />
+        </section>
+    </header>
+    <p class="lead">{frontmatter.abstract}</p>
+    <slot />
+</article>
