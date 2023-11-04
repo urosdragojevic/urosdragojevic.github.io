@@ -11,11 +11,11 @@ export const ui = {
         'home.languageLabel': 'Language',
         'home.title': 'Blog',
         'home.disclaimer': 'DISCLAIMER: This blog is a collection of my personal notes. I hope you find it useful, but be sure to do your own research!',
-        'home.latest': 'Latest posts',
+        'home.latest': 'Latest Posts',
         'home.noPostsFound': 'No posts found.',
         'articleCard.publishedOn': 'Published on',
         'articleCard.readMore': 'Read more...',
-        'toc.title': 'Table of contents',
+        'toc.title': 'Table of Contents',
     },
     sr: {
         'home.languageLabel': 'Jezik',
