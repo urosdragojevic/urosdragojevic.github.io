@@ -3,7 +3,8 @@ import ArticleCard from "../components/ArticleCard.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 import { useTranslations } from "../i18n/utils";
-import Warning from "./Warning.astro";
+import Banner from "./Banner/Banner.astro";
+import { BannerType } from "./Banner/banner-type.enum";
 
 const [, lang] = Astro.url.pathname.split("/");
 const nonDraftPosts = await getCollection(
@@ -17,7 +18,7 @@ const t = useTranslations(lang as "en" | "sr");
 ---
 
 <SiteLayout title={t("home.title")}>
-    <Warning type={1}>{t("home.disclaimer")}</Warning>
+    <Banner type={BannerType.Warning}>{t("home.disclaimer")}</Banner>
     <section class="articles">
         <h1>{t("home.latest")}</h1>
         {

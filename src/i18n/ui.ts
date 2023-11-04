@@ -11,10 +11,11 @@ export const ui = {
         'home.languageLabel': 'Language',
         'home.title': 'Blog',
         'home.disclaimer': 'DISCLAIMER: This blog is a collection of my personal notes. I hope you find it useful, but be sure to do your own research!',
-        'home.latest': 'Latest Posts',
+        'home.latest': 'Latest posts',
         'home.noPostsFound': 'No posts found.',
         'articleCard.publishedOn': 'Published on',
         'articleCard.readMore': 'Read more...',
+        'toc.title': 'Table of contents',
     },
     sr: {
         'home.languageLabel': 'Jezik',
@@ -23,5 +24,6 @@ export const ui = {
         'home.noPostsFound': 'Nisu pronađeni postovi.',
         'articleCard.publishedOn': 'Objavljeno',
         'articleCard.readMore': 'Pročitaj više...',
+        'toc.title': 'Sadržaj',
     },
 } as const;
