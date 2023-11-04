@@ -1,0 +1,37 @@
+---
+import { useTranslations } from "../i18n/utils";
+const [, lang] = Astro.url.pathname.split("/");
+
+const { headings } = Astro.props;
+const grouppedHeadings = headings?.reduce((array, heading) => {
+    if (heading.depth === 2) {
+        array.push({ ...heading, subheadings: [] });
+    } else if (heading.depth === 3) {
+        array.at(-1)?.subheadings.push(heading);
+    }
+    return array;
+}, []);
+const t = useTranslations(lang as "en" | "sr");
+---
+
+<h2>{t("toc.title")}</h2>
+<nav id="table-of-contents" aria-label="Table Of Contents">
+    <ol>
+        {
+            grouppedHeadings?.map((h) => (
+                <li>
+                    <a href={`#${h.slug}`}>{h.text}</a>
+                    {h.subheadings.length > 0 && (
+                        <ol>
+                            {h.subheadings.map((sub) => (
+                                <li>
+                                    <a href={`#${sub.slug}`}>{sub.text}</a>
+                                </li>
+                            ))}
+                        </ol>
+                    )}
+                </li>
+            ))
+        }
+    </ol>
+</nav>

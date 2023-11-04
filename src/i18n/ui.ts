@@ -15,6 +15,7 @@ export const ui = {
         'home.noPostsFound': 'No posts found.',
         'articleCard.publishedOn': 'Published on',
         'articleCard.readMore': 'Read more...',
+        'toc.title': 'Table of Contents',
     },
     sr: {
         'home.languageLabel': 'Jezik',
@@ -23,5 +24,6 @@ export const ui = {
         'home.noPostsFound': 'Nisu pronađeni postovi.',
         'articleCard.publishedOn': 'Objavljeno',
         'articleCard.readMore': 'Pročitaj više...',
+        'toc.title': 'Sadržaj',
     },
 } as const;
