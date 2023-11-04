@@ -1,0 +1,31 @@
+---
+import { BannerType } from "./banner-type.enum";
+interface Props {
+    type: BannerType;
+}
+const { type } = Astro.props;
+let typeClass;
+let icon;
+switch (type) {
+    case BannerType.Note: {
+        typeClass = "bg-blue-500/50";
+        icon = "🛈";
+        break;
+    }
+    case BannerType.Warning: {
+        typeClass = " bg-yellow-500/50";
+        icon = "⚠";
+        break;
+    }
+    case BannerType.Error: {
+        typeClass = " bg-red-500/50";
+        icon = "⛔";
+        break;
+    }
+}
+---
+
+<aside class=`text-black dark:text-white flex items-center mb-8 ${typeClass}`>
+    <span class="m-2 text-xl">{icon}</span>
+    <p class="px-2"><slot /></p>
+</aside>

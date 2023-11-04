@@ -1,0 +1,18 @@
+---
+title: 'npm'
+author: 'Uros Dragojevic'
+date: 2023-10-31
+draft: true
+abstract: 'npm tips'
+categories: ['development']
+---
+
+## Fix audit issues
+
+- delete `node_modules`
+- delete `package-lock.json`
+- run `npm install`
+
+This pulls all dependencies again, meaning that all versions of dependencies marked with ^, ~ etc. will pull newer versions if available.
+
+> `npm audit fix` should perform the same task as above.
