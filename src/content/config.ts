@@ -1,4 +1,4 @@
-import { z, defineCollection } from 'astro:content';
+import { z, defineCollection, reference } from 'astro:content';
 
 const postsCollection = defineCollection({
     type: 'content',
@@ -8,7 +8,8 @@ const postsCollection = defineCollection({
         date: z.date(),
         draft: z.boolean(),
         abstract: z.string().optional(),
-        categories: z.array(z.enum(['development', 'security', 'operations', 'about']))
+        categories: z.array(z.enum(['development', 'security', 'operations', 'about'])),
+        relatedPosts: z.array(reference('posts')).optional()
     }),
 });
 

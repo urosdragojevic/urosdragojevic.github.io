@@ -2,6 +2,8 @@
 import Categories from "../components/Categories.astro";
 import ToC from "../components/ToC.astro";
 import SiteLayout from "./SiteLayout.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
+
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
 
@@ -32,10 +34,17 @@ const { lang } = Astro.params;
         </header>
         <p class="lead">{frontmatter.abstract}</p>
         <aside class="table-of-contents">
-            <ToC headings={headings} />
+            <ToC headings={headings} relatedPosts={frontmatter.relatedPosts} />
         </aside>
         <section class="main-post-section">
             <slot />
         </section>
+        {
+            frontmatter.relatedPosts && (
+                <section id="related-posts">
+                    <RelatedPosts posts={frontmatter.relatedPosts} />
+                </section>
+            )
+        }
     </article>
 </SiteLayout>

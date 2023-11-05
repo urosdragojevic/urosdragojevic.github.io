@@ -1,0 +1,24 @@
+---
+import { getEntry } from "astro:content";
+import { useTranslations } from "../i18n/utils";
+const [, lang] = Astro.url.pathname.split("/");
+
+const { posts } = Astro.props;
+const relatedPosts = await Promise.all(
+    posts.map((slug) => getEntry("posts", slug))
+);
+const t = useTranslations(lang as "en" | "sr");
+---
+
+<h2>{t("toc.relatedPosts")}</h2>
+<ul>
+    {
+        relatedPosts.map((post) => (
+            <li>
+                <a href={`${Astro.url.origin}/${post.slug}`}>
+                    {post.data.title}
+                </a>
+            </li>
+        ))
+    }
+</ul>

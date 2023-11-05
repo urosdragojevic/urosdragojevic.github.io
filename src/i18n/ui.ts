@@ -16,6 +16,7 @@ export const ui = {
         'articleCard.publishedOn': 'Published on',
         'articleCard.readMore': 'Read more...',
         'toc.title': 'Table of Contents',
+        'toc.relatedPosts': 'Related Posts',
     },
     sr: {
         'home.languageLabel': 'Jezik',
@@ -25,5 +26,6 @@ export const ui = {
         'articleCard.publishedOn': 'Objavljeno',
         'articleCard.readMore': 'Pročitaj više...',
         'toc.title': 'Sadržaj',
+        'toc.relatedPosts': 'Povezani članci',
     },
 } as const;

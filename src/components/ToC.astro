@@ -2,7 +2,7 @@
 import { useTranslations } from "../i18n/utils";
 const [, lang] = Astro.url.pathname.split("/");
 
-const { headings } = Astro.props;
+const { headings, relatedPosts } = Astro.props;
 const grouppedHeadings = headings?.reduce((array, heading) => {
     if (heading.depth === 2) {
         array.push({ ...heading, subheadings: [] });
@@ -32,6 +32,13 @@ const t = useTranslations(lang as "en" | "sr");
                     )}
                 </li>
             ))
+        }
+        {
+            relatedPosts && (
+                <li>
+                    <a href="#related-posts">{t("toc.relatedPosts")}</a>
+                </li>
+            )
         }
     </ol>
 </nav>
