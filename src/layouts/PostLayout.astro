@@ -1,17 +1,13 @@
 ---
-import { getEntry } from "astro:content";
 import Categories from "../components/Categories.astro";
 import ToC from "../components/ToC.astro";
 import SiteLayout from "./SiteLayout.astro";
-import { useTranslations } from "../i18n/utils";
 import RelatedPosts from "../components/RelatedPosts.astro";
 
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
 
 const { lang } = Astro.params;
-
-const t = useTranslations(lang as "en" | "sr");
 ---
 
 <SiteLayout title={frontmatter.title}>
