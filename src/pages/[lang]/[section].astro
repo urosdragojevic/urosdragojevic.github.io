@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import SectionIndex from "../../components/SectionIndex.astro";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("posts");
+
+    const paths = pages.map((page) => {
+        const [lang, section] = page.slug.split("/");
+        return {
+            params: { lang, section },
+        };
+    });
+
+    return paths;
+}
+---
+
+<SectionIndex />

@@ -1,7 +1,7 @@
-export const languages = {
+export const SiteLanguages = {
     en: 'English',
     sr: 'Srpski',
-};
+} as const;
 
 export const defaultLang = 'en';
 
@@ -17,6 +17,12 @@ export const ui = {
         'articleCard.readMore': 'Read more...',
         'toc.title': 'Table of Contents',
         'toc.relatedPosts': 'Related Posts',
+        'development.title': 'Development',
+        'development.subtitle': 'Posts on topics regarding development of software.',
+        'security.title': 'Security',
+        'security.subtitle': 'Posts on topics regarding software security.',
+        'operations.title': 'Operations',
+        'operations.subtitle': 'Posts on topics regarding operations.'
     },
     sr: {
         'home.languageLabel': 'Jezik',
