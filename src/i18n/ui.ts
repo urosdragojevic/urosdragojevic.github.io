@@ -22,7 +22,11 @@ export const ui = {
         'security.title': 'Security',
         'security.subtitle': 'Posts on topics regarding software security.',
         'operations.title': 'Operations',
-        'operations.subtitle': 'Posts on topics regarding operations.'
+        'operations.subtitle': 'Posts on topics regarding operations.',
+        'navCtl.previousPost': 'Previous post',
+        'navCtl.nextPost': 'Next post',
+        'navCtl.backToHomepage': 'Back to homepage',
+        'navCtl.backToTop': 'Back to top',
     },
     sr: {
         'home.languageLabel': 'Jezik',
@@ -33,5 +37,9 @@ export const ui = {
         'articleCard.readMore': 'Pročitaj više...',
         'toc.title': 'Sadržaj',
         'toc.relatedPosts': 'Povezani članci',
+        'navCtl.previousPost': 'Prethodni post',
+        'navCtl.nextPost': 'Sledeći post',
+        'navCtl.backToHomepage': 'Nazad na početnu stranicu',
+        'navCtl.backToTop': 'Nazad na početak',
     },
 } as const;

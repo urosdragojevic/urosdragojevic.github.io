@@ -1,9 +1,9 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { useTranslations } from "../i18n/utils";
-import Banner from "./Banner/Banner.astro";
-import { BannerType } from "./Banner/banner-type.enum";
+import Banner from "./Banner.astro";
 import PostsList from "./PostsList.astro";
+import { BannerType } from "./Banner.astro";
 
 const [, lang] = Astro.url.pathname.split("/");
 const t = useTranslations(lang as "en" | "sr");

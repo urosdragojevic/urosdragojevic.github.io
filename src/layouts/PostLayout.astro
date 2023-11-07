@@ -3,6 +3,7 @@ import Categories from "../components/Categories.astro";
 import ToC from "../components/ToC.astro";
 import SiteLayout from "./SiteLayout.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
+import PostNavControls from "../components/PostNavControls.astro";
 
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
@@ -47,4 +48,7 @@ const { lang } = Astro.params;
             )
         }
     </article>
+    <section class="post-nav-controls my-10">
+        <PostNavControls />
+    </section>
 </SiteLayout>
