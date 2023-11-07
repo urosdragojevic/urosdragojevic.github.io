@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Homepage from "../../components/Homepage.astro";
+import { SiteLanguages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+    const paths = Object.keys(SiteLanguages).map((lang) => {
+        return {
+            params: {
+                lang,
+            },
+        };
+    });
+    return paths;
+}
+const [, lang] = Astro.url.pathname.split("/");
+const nonDraftPosts = await getCollection(
+    "posts",
+    ({ data, slug }) => !data.draft && slug.startsWith(lang)
+);
+const posts = [...nonDraftPosts].sort((a, b) =>
+    a.data.date < b.data.date ? 1 : -1
+);
+---
+
+<Homepage posts={posts} />

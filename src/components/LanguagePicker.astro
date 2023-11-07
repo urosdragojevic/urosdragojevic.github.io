@@ -1,5 +1,5 @@
 ---
-import { languages } from "../i18n/ui";
+import { SiteLanguages } from "../i18n/ui";
 const { languageLabel } = Astro.props;
 ---
 
@@ -7,7 +7,7 @@ const { languageLabel } = Astro.props;
     <span class="flex items-center">{languageLabel}:</span>
     <ul class="flex flex-row list-none m-0 lg:m-0 p-0 lg:p-0">
         {
-            Object.entries(languages).map(([lang, label]) => (
+            Object.entries(SiteLanguages).map(([lang, label]) => (
                 <li>
                     <a class="mr-2" href={`/${lang}/`}>
                         {label}

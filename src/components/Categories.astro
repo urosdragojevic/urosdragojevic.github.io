@@ -5,14 +5,16 @@ const colors = {
     security: "bg-yellow-500/50",
     operations: "bg-green-500/50",
 };
+const [, lang] = Astro.url.pathname.split("/");
 ---
 
 <aside class="flex flex-row flex-wrap md:justify-end max-w-xl">
     {
         categories?.map((category) => (
-            <p
+            <a
+                href={`${Astro.url.origin}/${lang}/${category}/`}
                 class={`${colors[category]} p-1 rounded m-1 h-fit w-fit`}
-            >{`#${category}`}</p>
+            >{`#${category}`}</a>
         ))
     }
 </aside>

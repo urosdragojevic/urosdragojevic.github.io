@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import PostsList from "./PostsList.astro";
+import { useTranslations } from "../i18n/utils";
+
+const [, lang, category] = Astro.url.pathname.split("/");
+const nonDraftPosts = await getCollection(
+    "posts",
+    ({ data, slug }) =>
+        !data.draft &&
+        slug.startsWith(lang) &&
+        data.categories.includes(category as any)
+);
+const posts = [...nonDraftPosts].sort((a, b) =>
+    a.data.date < b.data.date ? 1 : -1
+);
+const t = useTranslations(lang as "en" | "sr");
+---
+
+<SiteLayout title={t(category as any)}>
+    <section class="posts">
+        <PostsList
+            posts={posts}
+            title={t(`${category}.title` as any)}
+            subtitle={t(`${category}.subtitle` as any)}
+        />
+    </section>
+</SiteLayout>

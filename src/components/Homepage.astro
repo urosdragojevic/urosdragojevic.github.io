@@ -1,48 +1,22 @@
 ---
-import ArticleCard from "../components/ArticleCard.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { getCollection } from "astro:content";
 import { useTranslations } from "../i18n/utils";
 import Banner from "./Banner/Banner.astro";
 import { BannerType } from "./Banner/banner-type.enum";
+import PostsList from "./PostsList.astro";
 
 const [, lang] = Astro.url.pathname.split("/");
-const nonDraftPosts = await getCollection(
-    "posts",
-    ({ data, slug }) => !data.draft && slug.startsWith(lang)
-);
-const posts = [...nonDraftPosts].sort((a, b) =>
-    a.data.date < b.data.date ? 1 : -1
-);
 const t = useTranslations(lang as "en" | "sr");
+const { posts } = Astro.props;
 ---
 
 <SiteLayout title={t("home.title")}>
     <Banner type={BannerType.Warning}>{t("home.disclaimer")}</Banner>
-    <section class="articles">
-        <h1>{t("home.latest")}</h1>
-        {
-            posts.length > 0 ? (
-                <ul class="list-none p-0 lg:p-0">
-                    {posts.map((post) => {
-                        const [lang, ...rest] = post.slug.split("/");
-                        return (
-                            <li class="p-0">
-                                <ArticleCard
-                                    title={post.data.title}
-                                    date={post.data.date}
-                                    abstract={post.data.abstract}
-                                    link={rest.join("/")}
-                                    categories={post.data.categories}
-                                    lang={lang}
-                                />
-                            </li>
-                        );
-                    })}
-                </ul>
-            ) : (
-                <p>{t("home.noPostsFound")}</p>
-            )
-        }
+    <section class="posts">
+        <PostsList
+            posts={posts}
+            title={t("home.latest")}
+            subtitle="Read some of the latest posts from the blog."
+        />
     </section>
 </SiteLayout>

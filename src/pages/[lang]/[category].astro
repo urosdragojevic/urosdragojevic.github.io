@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import CategoryIndex from "../../components/CategoryIndex.astro";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("posts");
+
+    const paths = pages.map((page) => {
+        const [lang, category] = page.slug.split("/");
+        return {
+            params: { lang, category },
+        };
+    });
+
+    return paths;
+}
+---
+
+<CategoryIndex />
