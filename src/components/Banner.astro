@@ -1,5 +1,9 @@
 ---
-import { BannerType } from "./banner-type.enum";
+export enum BannerType {
+    Note,
+    Warning,
+    Error,
+}
 interface Props {
     type: BannerType;
 }
