@@ -13,15 +13,15 @@ const prev = previousPost && (await getEntry("posts", previousPost));
 
 <nav>
     <ul class="flex flex-col lg:flex-row justify-around list-none p-0 lg:p-0">
-        <li class="flex justify-center px-4">
-            {
-                previousPost && (
+        {
+            previousPost && (
+                <li class="flex justify-center px-4">
                     <a href={`${Astro.url.origin}/${previousPost}`}>
                         🠬 {prev?.data.title}
                     </a>
-                )
-            }
-        </li>
+                </li>
+            )
+        }
         <li class="flex justify-center px-4">
             <button
                 id="back-to-top-btn"
@@ -34,15 +34,15 @@ const prev = previousPost && (await getEntry("posts", previousPost));
                 >{t("navCtl.backToHomepage")} 🏠</a
             >
         </li>
-        <li class="flex justify-center px-4">
-            {
-                nextPost && (
+        {
+            nextPost && (
+                <li class="flex justify-center px-4">
                     <a href={`${Astro.url.origin}/${nextPost}`}>
                         {next?.data.title} 🠮
                     </a>
-                )
-            }
-        </li>
+                </li>
+            )
+        }
     </ul>
 </nav>
 
