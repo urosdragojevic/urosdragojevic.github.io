@@ -11,12 +11,14 @@ const { posts } = Astro.props;
 ---
 
 <SiteLayout title={t("home.title")}>
-    <Banner type={BannerType.Warning}>{t("home.disclaimer")}</Banner>
-    <section class="posts">
-        <PostsList
-            posts={posts}
-            title={t("home.latest")}
-            subtitle="Read some of the latest posts from the blog."
-        />
-    </section>
+    <main class="max-w-3xl md:mx-auto">
+        <Banner type={BannerType.Warning}>{t("home.disclaimer")}</Banner>
+        <section class="posts">
+            <PostsList
+                posts={posts}
+                title={t("home.latest")}
+                subtitle={t("home.subtitle")}
+            />
+        </section>
+    </main>
 </SiteLayout>
