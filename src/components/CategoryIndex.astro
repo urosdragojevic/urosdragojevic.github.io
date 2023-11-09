@@ -19,11 +19,13 @@ const t = useTranslations(lang as "en" | "sr");
 ---
 
 <SiteLayout title={t(category as any)}>
-    <section class="posts">
-        <PostsList
-            posts={posts}
-            title={t(`${category}.title` as any)}
-            subtitle={t(`${category}.subtitle` as any)}
-        />
-    </section>
+    <main class="max-w-3xl md:mx-auto">
+        <section class="posts">
+            <PostsList
+                posts={posts}
+                title={t(`${category}.title` as any)}
+                subtitle={t(`${category}.subtitle` as any)}
+            />
+        </section>
+    </main>
 </SiteLayout>

@@ -9,7 +9,9 @@ const postsCollection = defineCollection({
         draft: z.boolean(),
         abstract: z.string().optional(),
         categories: z.array(z.enum(['development', 'security', 'operations', 'about'])),
-        relatedPosts: z.array(reference('posts')).optional()
+        relatedPosts: z.array(reference('posts')).optional(),
+        nextPost: reference('posts').optional(),
+        previousPost: reference('posts').optional(),
     }),
 });
 

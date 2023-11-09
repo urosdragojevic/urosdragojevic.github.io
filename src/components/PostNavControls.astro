@@ -1,44 +1,44 @@
 ---
+import { getEntry } from "astro:content";
 import { useTranslations } from "../i18n/utils";
 
 const { previousPost, nextPost } = Astro.props;
-const [, lang, category] = Astro.url.pathname.split("/");
+const [, lang] = Astro.url.pathname.split("/");
 
 const t = useTranslations(lang as "en" | "sr");
+
+const next = nextPost && (await getEntry("posts", nextPost));
+const prev = previousPost && (await getEntry("posts", previousPost));
 ---
 
 <nav>
     <ul class="flex flex-col lg:flex-row justify-around list-none p-0 lg:p-0">
         {
             previousPost && (
-                <li class="mx-4">
-                    <a
-                        href={`${Astro.url.origin}/${lang}/${category}/${previousPost}`}
-                    >
-                        🠬 {t("navCtl.previousPost")}
+                <li class="flex justify-center px-4">
+                    <a href={`${Astro.url.origin}/${previousPost}`}>
+                        🠬 {prev?.data.title}
                     </a>
                 </li>
             )
         }
-        <li>
+        <li class="flex justify-center px-4">
             <button
                 id="back-to-top-btn"
                 class="p-2 prose-invert dark:prose bg-zinc-900 text-zinc-100 dark:bg-zinc-100 mx-4 rounded hover:shadow-md hover:shadow-blue-500 hover:text-blue-500"
                 >{t("navCtl.backToTop")} 🠭</button
             >
         </li>
-        <li class="flex justify-center mx-4">
+        <li class="flex justify-center px-4">
             <a href={`${Astro.url.origin}/${lang}/`}
                 >{t("navCtl.backToHomepage")} 🏠</a
             >
         </li>
         {
             nextPost && (
-                <li class="mx-4">
-                    <a
-                        href={`${Astro.url.origin}/${lang}/${category}/${nextPost}`}
-                    >
-                        {t("navCtl.nextPost")} 🠮
+                <li class="flex justify-center px-4">
+                    <a href={`${Astro.url.origin}/${nextPost}`}>
+                        {next?.data.title} 🠮
                     </a>
                 </li>
             )

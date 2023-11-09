@@ -12,43 +12,51 @@ const { lang } = Astro.params;
 ---
 
 <SiteLayout title={frontmatter.title}>
-    <article>
-        <header class="flex justify-between flex-col md:flex-row">
-            <hgroup class="flex flex-col">
-                <h1 class="mb-0 lg:mb-0">{frontmatter.title}</h1>
-                <p>
-                    By&nbsp;<cite class="author">
-                        <a
-                            rel="author"
-                            href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
-                            >{frontmatter.author}</a
+    <main class="max-w-3xl md:mx-auto">
+        <article>
+            <header class="flex justify-between flex-col md:flex-row">
+                <hgroup class="flex flex-col">
+                    <h1 class="mb-0 lg:mb-0">{frontmatter.title}</h1>
+                    <p>
+                        By&nbsp;<cite class="author">
+                            <a
+                                rel="author"
+                                href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
+                                >{frontmatter.author}</a
+                            >
+                        </cite>&nbsp;on&nbsp;
+                        <time pubdate datetime={frontmatter.date}
+                            >{date.toLocaleDateString(lang)}</time
                         >
-                    </cite>&nbsp;on&nbsp;
-                    <time pubdate datetime={frontmatter.date}
-                        >{date.toLocaleDateString(lang)}</time
-                    >
-                </p>
-            </hgroup>
-            <section>
-                <Categories categories={frontmatter.categories} />
-            </section>
-        </header>
-        <p class="lead">{frontmatter.abstract}</p>
-        <aside class="table-of-contents">
-            <ToC headings={headings} relatedPosts={frontmatter.relatedPosts} />
-        </aside>
-        <section class="main-post-section">
-            <slot />
-        </section>
-        {
-            frontmatter.relatedPosts && (
-                <section id="related-posts">
-                    <RelatedPosts posts={frontmatter.relatedPosts} />
+                    </p>
+                </hgroup>
+                <section>
+                    <Categories categories={frontmatter.categories} />
                 </section>
-            )
-        }
-    </article>
-    <section class="post-nav-controls my-10">
-        <PostNavControls />
+            </header>
+            <p class="lead">{frontmatter.abstract}</p>
+            <aside class="table-of-contents">
+                <ToC
+                    headings={headings}
+                    relatedPosts={frontmatter.relatedPosts}
+                />
+            </aside>
+            <section class="main-post-section">
+                <slot />
+            </section>
+            {
+                frontmatter.relatedPosts && (
+                    <section id="related-posts">
+                        <RelatedPosts posts={frontmatter.relatedPosts} />
+                    </section>
+                )
+            }
+        </article>
+    </main>
+    <section class="my-10 w-screen">
+        <PostNavControls
+            nextPost={frontmatter.nextPost}
+            previousPost={frontmatter.previousPost}
+        />
     </section>
 </SiteLayout>
