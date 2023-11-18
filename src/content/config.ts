@@ -12,7 +12,7 @@ const postsCollection = defineCollection({
         relatedPosts: z.array(reference('posts')).optional(),
         nextPost: reference('posts').optional(),
         previousPost: reference('posts').optional(),
-        series: reference('postSeries').optional()
+        series: reference('series').optional()
     }),
 });
 
