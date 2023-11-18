@@ -5,7 +5,7 @@ const [, lang] = Astro.url.pathname.split("/");
 
 const { posts } = Astro.props;
 const relatedPosts = await Promise.all(
-    posts.map((slug) => getEntry("posts", slug))
+    posts.map((slug) => getEntry("posts", slug)),
 );
 const t = useTranslations(lang as "en" | "sr");
 ---

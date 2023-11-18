@@ -1,9 +1,9 @@
 ---
-import Categories from "../components/Categories.astro";
-import ToC from "../components/ToC.astro";
+import Categories from "@components/Categories.astro";
+import PostNavControls from "@components/PostNavControls.astro";
+import RelatedPosts from "@components/RelatedPosts.astro";
 import SiteLayout from "./SiteLayout.astro";
-import RelatedPosts from "../components/RelatedPosts.astro";
-import PostNavControls from "../components/PostNavControls.astro";
+import ToC from "@components/ToC.astro";
 
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);

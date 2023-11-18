@@ -1,18 +1,25 @@
 ---
+import SeriesIndex from "@components/SeriesIndex.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-    const pages = await getCollection("posts");
+    const postSeries = await getCollection(
+        "series",
+        (series) => !series.data.draft,
+    );
 
-    const paths = pages.map((page) => {
-        const [lang, category, series] = page.slug.split("/");
+    const paths = postSeries.map((page) => {
+        const [lang, category, series] = page.id.split("/");
         return {
             params: { lang, category, series },
+            props: page,
         };
     });
 
     return paths;
 }
+
+const { data } = Astro.props;
 ---
 
-<p>Series</p>
+<SeriesIndex data={data} />

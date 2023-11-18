@@ -1,0 +1,44 @@
+---
+import { getEntry } from "astro:content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Categories from "./Categories.astro";
+import PostsList from "./PostsList.astro";
+
+const { data } = Astro.props;
+
+const posts = await Promise.all(
+    data.posts.map(({ slug }) => getEntry("posts", slug)),
+);
+---
+
+<SiteLayout title={data.title}>
+    <main class="max-w-3xl md:mx-auto">
+        <article>
+            <header class="flex justify-between flex-col md:flex-row">
+                <hgroup class="flex flex-col">
+                    <h1 class="mb-0 lg:mb-0">{data.title}</h1>
+                    <p>
+                        By&nbsp;<cite class="author">
+                            <a
+                                rel="author"
+                                href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
+                                >{data.author}</a
+                            >
+                        </cite>
+                    </p>
+                </hgroup>
+                <section>
+                    <Categories categories={data.categories} />
+                </section>
+            </header>
+            <p class="lead">{data.abstract}</p>
+            {
+                posts && (
+                    <section id="related-posts">
+                        <PostsList posts={posts} />
+                    </section>
+                )
+            }
+        </article>
+    </main>
+</SiteLayout>
