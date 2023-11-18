@@ -1,0 +1,8 @@
+title: 'Everything I know about TypeScript'
+author: 'Uros Dragojevic'
+draft: false
+abstract: 'Collection of posts on TypeScript'
+categories: 
+  - development
+posts:
+  - en/development/typescript/typescript-basics

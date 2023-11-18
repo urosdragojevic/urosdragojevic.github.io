@@ -10,10 +10,10 @@ const nonDraftPosts = await getCollection(
     ({ data, slug }) =>
         !data.draft &&
         slug.startsWith(lang) &&
-        data.categories.includes(category as any)
+        data.categories.includes(category as any),
 );
 const posts = [...nonDraftPosts].sort((a, b) =>
-    a.data.date < b.data.date ? 1 : -1
+    a.data.date < b.data.date ? 1 : -1,
 );
 const t = useTranslations(lang as "en" | "sr");
 ---

@@ -8,22 +8,20 @@ const t = useTranslations(lang as "en" | "sr");
 const { title, subtitle, posts } = Astro.props;
 ---
 
-<h1>{title}</h1>
+{title && <h1>{title}</h1>}
 {subtitle && <p class="lead">{subtitle}</p>}
 {
     posts.length > 0 ? (
         <ul class="list-none p-0 lg:p-0">
             {posts.map((post) => {
-                const [lang, ...rest] = post.slug.split("/");
+                const [lang] = post.slug.split("/");
                 return (
                     <li class="p-0">
                         <ArticleCard
                             title={post.data.title}
                             date={post.data.date}
                             abstract={post.data.abstract}
-                            link={`${Astro.url.origin}/${lang}/${rest.join(
-                                "/"
-                            )}`}
+                            link={`${Astro.url.origin}/${post.slug}`}
                             categories={post.data.categories}
                             lang={lang}
                         />

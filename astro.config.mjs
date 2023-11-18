@@ -7,7 +7,7 @@ const setPostLayout = () => {
   return function (_, file) {
     if (!file.data.astro.frontmatter.draft) {
       file.data.astro.frontmatter.layout =
-        file.data.astro.frontmatter.layout || "../../../../../layouts/PostLayout.astro";
+        file.data.astro.frontmatter.layout || "@layouts/PostLayout.astro";
     }
   };
 };
