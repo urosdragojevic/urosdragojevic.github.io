@@ -1,0 +1,49 @@
+---
+title: 'Generate PDFs in js'
+author: en/uros-dragojevic
+date: 2024-01-01
+draft: true
+abstract: 'Library for generating PDFs from Javascript code'
+categories: ['development']
+---
+```javascript
+        import html2pdf from "html2pdf.js";
+        const pdfButton = document.getElementById("printPdf");
+
+        pdfButton?.addEventListener("click", () => {
+            var element = document.getElementById("print");
+            const opt = {
+                margin: [15, 15],
+                filename: "uros-dragojevic-cv",
+                jsPDF: { format: "a4", unit: "mm" },
+                pagebreak: {
+                    mode: ["avoid-all", "css", "legacy"],
+                },
+            };
+            html2pdf()
+                .set(opt)
+                .from(element)
+                .toContainer()
+                .get("container")
+                .then((container) => {
+                    const el = container.querySelector("#print");
+                    el.classList.add("prose");
+                })
+                .toPdf()
+                .get("pdf")
+                .then((pdf) => {
+                    var totalPages = pdf.internal.getNumberOfPages();
+                    for (let i = 1; i <= totalPages; i++) {
+                        pdf.setPage(i);
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(100);
+                        pdf.text(
+                            "Page " + i + " of " + totalPages,
+                            pdf.internal.pageSize.getWidth() / 2.3,
+                            pdf.internal.pageSize.getHeight() - 10,
+                        );
+                    }
+                })
+                .save();
+        });
+```

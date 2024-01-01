@@ -4,7 +4,7 @@ const postsCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
-        author: z.string(),
+        author: reference('authors'),
         date: z.date(),
         draft: z.boolean(),
         abstract: z.string().optional(),
@@ -28,7 +28,27 @@ const seriesCollection = defineCollection({
     }),
 });
 
+const authorsCollection = defineCollection({
+    type: 'data',
+    schema: z.object({
+        firstName: z.string(),
+        lastName: z.string(),
+        dateOfBirth: z.string(),
+        cv: reference('cv').optional()
+    }),
+});
+
+const cvCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        lastModified: z.date().optional(),
+    }),
+});
+
+
 export const collections = {
     'posts': postsCollection,
-    'series': seriesCollection
+    'series': seriesCollection,
+    'authors': authorsCollection,
+    'cv': cvCollection
 };

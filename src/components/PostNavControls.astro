@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import { useTranslations } from "../i18n/utils";
+import BlogButton from "./BlogButton.astro";
 
 const { previousPost, nextPost } = Astro.props;
 const [, lang] = Astro.url.pathname.split("/");
@@ -23,11 +24,7 @@ const prev = previousPost && (await getEntry("posts", previousPost));
             )
         }
         <li class="flex justify-center px-4">
-            <button
-                id="back-to-top-btn"
-                class="p-2 prose-invert dark:prose bg-zinc-900 text-zinc-100 dark:bg-zinc-100 mx-4 rounded hover:shadow-md hover:shadow-blue-500 hover:text-blue-500"
-                >{t("navCtl.backToTop")} 🠭</button
-            >
+            <BlogButton id="back-to-top-btn" text={t("navCtl.backToTop")} />
         </li>
         <li class="flex justify-center px-4">
             <a href={`${Astro.url.origin}/${lang}/`}

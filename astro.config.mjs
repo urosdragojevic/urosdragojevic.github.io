@@ -5,9 +5,12 @@ import tailwind from "@astrojs/tailwind";
 
 const setPostLayout = () => {
   return function (_, file) {
+    console.log(file.data);
     if (!file.data.astro.frontmatter.draft) {
-      file.data.astro.frontmatter.layout =
-        file.data.astro.frontmatter.layout || "@layouts/PostLayout.astro";
+      if (file.data.astro.frontmatter.categories) {
+        file.data.astro.frontmatter.layout =
+          file.data.astro.frontmatter.layout || "@layouts/PostLayout.astro";
+      }
     }
   };
 };

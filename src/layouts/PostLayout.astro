@@ -4,9 +4,14 @@ import PostNavControls from "@components/PostNavControls.astro";
 import RelatedPosts from "@components/RelatedPosts.astro";
 import SiteLayout from "./SiteLayout.astro";
 import ToC from "@components/ToC.astro";
+import { getEntry } from "astro:content";
 
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
+
+const author = await getEntry("authors", frontmatter.author);
+
+const [authorLang, authorId] = author.id.split("/");
 
 const { lang } = Astro.params;
 ---
@@ -21,8 +26,10 @@ const { lang } = Astro.params;
                         By&nbsp;<cite class="author">
                             <a
                                 rel="author"
-                                href="https://www.linkedin.com/in/uros-dragojevic-160322226/"
-                                >{frontmatter.author}</a
+                                href={`${Astro.url.origin}/${authorLang}/${author.collection}/${authorId}`}
+                                >{
+                                    `${author.data.firstName} ${author.data.lastName}`
+                                }</a
                             >
                         </cite>&nbsp;on&nbsp;
                         <time pubdate datetime={frontmatter.date}
