@@ -66,4 +66,4 @@ __Bachelor's degree__: Japanese Language and Literature
 - Email: [dragojevic.u@gmail.com](mailto:dragojevic.u@gmail.com)
 - Website: [https://blog.urosdragojevic.com](https://blog.urosdragojevic.com)
 - GitHub: [https://github.com/urosdragojevic](https://github.com/urosdragojevic)
-- LinkedIn: [www.linkedin.com/in/uros-dragojevic-160322226](www.linkedin.com/in/uros-dragojevic-160322226)
+- LinkedIn: [https://linkedin.com/in/uros-dragojevic-160322226](https://linkedin.com/in/uros-dragojevic-160322226)
