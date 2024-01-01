@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "@layouts/SiteLayout.astro";
+import BlogButton from "@components/BlogButton.astro";
+
+export async function getStaticPaths() {
+    const authors = await getCollection("cv");
+
+    const paths = authors.map((page) => {
+        const [lang, authors, author] = page.slug.split("/");
+        return {
+            params: { lang, authors, author },
+            props: page,
+        };
+    });
+
+    return paths;
+}
+const page = Astro.props;
+const { Content } = await page.render();
+---
+
+<SiteLayout>
+    <main class="max-w-3xl md:mx-auto container">
+        <Content />
+    </main>
+    <div class="fixed bottom-10 flex justify-center w-screen">
+        <BlogButton id="printPdf" text="Download resume" />
+    </div>
+    <script>
+        const pdfButton = document.getElementById("printPdf");
+
+        pdfButton?.addEventListener("click", () => {
+            // Print the webpage
+            window.print();
+        });
+    </script>
+</SiteLayout>
