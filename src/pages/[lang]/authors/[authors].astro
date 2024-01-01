@@ -20,7 +20,7 @@ const page = Astro.props;
 const { Content } = await page.render();
 ---
 
-<SiteLayout>
+<SiteLayout displayNavIcons={false}>
     <main class="max-w-3xl md:mx-auto container">
         <Content />
     </main>

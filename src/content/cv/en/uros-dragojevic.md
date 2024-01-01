@@ -4,6 +4,8 @@ lastModified: 2024-01-01
 # Uros Dragojevic
 *Advanced Software Engineer at Zühlke Group -- Belgrade, Serbia*
 
+---
+
 ## Summary
 - Experience with analysis of customer requirements and designing systems to meet those requirements, including manual testing of developed modules and maintenance of existing modules.
 - Developing web applications in Java software stack.
