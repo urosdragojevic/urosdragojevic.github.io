@@ -10,7 +10,7 @@ export const ui = {
         'home.logo': '://blog',
         'home.languageLabel': 'Language',
         'home.title': 'Blog',
-        'home.subtitle': 'Read some of the latest posts from the blog.',
+        'home.subtitle': 'Read the latest posts from the blog.',
         'home.disclaimer': 'DISCLAIMER: This blog is a collection of my personal notes. I hope you find it useful, but be sure to do your own research!',
         'home.latest': 'Latest Posts',
         'home.noPostsFound': 'No posts found.',

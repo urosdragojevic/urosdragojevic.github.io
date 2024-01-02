@@ -1,6 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import { useTranslations } from "../i18n/utils";
+import PostsList from "./PostsList.astro";
 const [, lang] = Astro.url.pathname.split("/");
 
 const { posts } = Astro.props;
@@ -11,14 +12,4 @@ const t = useTranslations(lang as "en" | "sr");
 ---
 
 <h2>{t("toc.relatedPosts")}</h2>
-<ul>
-    {
-        relatedPosts.map((post) => (
-            <li>
-                <a href={`${Astro.url.origin}/${post.slug}`}>
-                    {post.data.title}
-                </a>
-            </li>
-        ))
-    }
-</ul>
+<PostsList posts={relatedPosts} />
