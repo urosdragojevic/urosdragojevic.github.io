@@ -24,9 +24,6 @@ const prev = previousPost && (await getEntry("posts", previousPost));
             )
         }
         <li class="flex justify-center px-4">
-            <BlogButton id="back-to-top-btn" text={t("navCtl.backToTop")} />
-        </li>
-        <li class="flex justify-center px-4">
             <a href={`${Astro.url.origin}/${lang}/`}
                 >{t("navCtl.backToHomepage")} 🏠</a
             >
