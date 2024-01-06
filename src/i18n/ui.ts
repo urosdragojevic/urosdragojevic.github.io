@@ -25,7 +25,7 @@ export const ui = {
         'operations.title': 'Operations',
         'operations.subtitle': 'Posts on topics regarding operations.',
         'navCtl.backToHomepage': 'Back to homepage',
-        'navCtl.backToTop': 'Back to top 🠭',
+        'navCtl.backToTop': '🠭',
     },
     sr: {
         'home.subtitle': 'Pročitaj najnovije postove.',
@@ -44,6 +44,6 @@ export const ui = {
         'operations.title': 'Operacije',
         'operations.subtitle': 'Postovi vezani za operacije.',
         'navCtl.backToHomepage': 'Nazad na početnu stranicu',
-        'navCtl.backToTop': 'Nazad na početak 🠭',
+        'navCtl.backToTop': '🠭',
     },
 } as const;

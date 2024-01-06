@@ -5,6 +5,12 @@ import RelatedPosts from "@components/RelatedPosts.astro";
 import SiteLayout from "./SiteLayout.astro";
 import ToC from "@components/ToC.astro";
 import { getEntry } from "astro:content";
+import BlogButton from "@components/BlogButton.astro";
+
+import { useTranslations } from "../i18n/utils";
+
+
+
 
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
@@ -14,6 +20,8 @@ const author = await getEntry("authors", frontmatter.author);
 const [authorLang, authorId] = author.id.split("/");
 
 const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "sr");
+
 ---
 
 <SiteLayout title={frontmatter.title}>
@@ -60,6 +68,9 @@ const { lang } = Astro.params;
             }
         </article>
     </main>
+    <div class="fixed bottom-20 right-20">
+        <BlogButton id="back-to-top-btn" text={t("navCtl.backToTop")} />
+    </div>
     <section class="my-10 min-w-full">
         <PostNavControls
             nextPost={frontmatter.nextPost}
