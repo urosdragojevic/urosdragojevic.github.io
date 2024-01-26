@@ -22,4 +22,5 @@ export default defineConfig({
   redirects: {
     '/': '/en/'
   },
+  site: 'https://blog.urosdragojevic.com',
 });
