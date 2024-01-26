@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 
 import tailwind from "@astrojs/tailwind";
+import rehypeCitation from 'rehype-citation';
 
 const setPostLayout = () => {
   return function (_, file) {
@@ -16,9 +17,15 @@ const setPostLayout = () => {
 
 export default defineConfig({
   markdown: {
-    remarkPlugins: [setPostLayout]
+    remarkPlugins: [setPostLayout],
+    rehypePlugins: [[rehypeCitation, {
+      bibliography: []
+    }
+    ]
+    ]
   },
-  integrations: [mdx(), tailwind()],
+  integrations: [
+    mdx(), tailwind()],
   redirects: {
     '/': '/en/'
   },
