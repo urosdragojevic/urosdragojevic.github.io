@@ -9,6 +9,9 @@ import BlogButton from "@components/BlogButton.astro";
 
 import { useTranslations } from "../i18n/utils";
 
+
+
+
 const { frontmatter, headings } = Astro.props;
 const date = new Date(frontmatter.date);
 
@@ -18,6 +21,7 @@ const [authorLang, authorId] = author.id.split("/");
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as "en" | "sr");
+
 ---
 
 <SiteLayout title={frontmatter.title}>
@@ -64,7 +68,7 @@ const t = useTranslations(lang as "en" | "sr");
             }
         </article>
     </main>
-    <div class="fixed bottom-20 end-1/4">
+    <div class="fixed bottom-20 right-20">
         <BlogButton id="back-to-top-btn" text={t("navCtl.backToTop")} />
     </div>
     <section class="my-10 min-w-full">
