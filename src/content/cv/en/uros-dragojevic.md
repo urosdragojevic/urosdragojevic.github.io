@@ -4,65 +4,92 @@ lastModified: 2024-01-01
 # Uros Dragojevic
 *Advanced Software Engineer at Zühlke Group -- Belgrade, Serbia*
 
----
-
-## Summary
-- Experience with analysis of customer requirements and designing systems to meet those requirements, including manual testing of developed modules and maintenance of existing modules.
-- Developing web applications in Java software stack.
-- Experience working with teams based in Japan, handling all communication and translation from Japanese to English and vice-versa.
-
-## Experience
-
-### Zühlke Group
-#### Advanced Software Engineer
-##### *July 2023 - Present (6 months) -- Belgrade, Serbia*
-
-#### Professional Software Engineer
-##### *May 2022 - September 2023 (1 year 5 months) -- Belgrade, Serbia*
-
-### Soft Road Apps
-#### Developer/Systems Engineer
-##### *January 2020 - September 2021 (1 year 9 months) -- Belgrade, Serbia*
-
-Designing and developing Java-based and eFront applications.
-Ensuring application designs conform to business goals and user requirements.
-Analyzing user requirements to inform application design.
-Creating relevant test cases and performing manual tests for the implemented modules.
-Debugging and resolving technical problems that arise.
-Producing detailed design and testing documentation.
-Translation of documentation from Japanese.
-Coordinating with team in Japan.
-
-## Certifications
-
-- Professional Scrum Developer™ I(PSD I)
-- AWS Certified Cloud Practitioner
-- Certified SAFe® 5 DevOpsPractitioner
-
 ## Education
 
-### University of the Ryukyus
-*October 2017 - September 2018 -- Okinawa, Japan*
+### University of Belgrade, Faculty of Mathematics
+#### Teaching course on Secure software development.
+##### *February 2024 - present -- Belgrade, Serbia*
 
-Japanese Government (MEXT) scholarship for Japanese Studies students
+
+### University of Belgrade, Faculty of Mathematics
+#### Taught course on Secure software development.
+##### *February 2023 - May 2023 -- Belgrade, Serbia*
+
+
+### University of the Ryukyus
+#### Japanese Government (MEXT) scholarship for Japanese Studies students
+##### *October 2017 - September 2018 -- Okinawa, Japan*
+
 
 ### University of Belgrade
-*October 2013 - June 2019 -- Belgrade, Serbia*
+#### Bachelor's degree in Japanese Language and Literature
+##### *October 2013 - June 2019 -- Belgrade, Serbia*
 
-__Bachelor's degree__: Japanese Language and Literature
+## Languages
 
-## Skills
-- Amazon Web Services (AWS)
-- Scrum
-- DevOps
-
-## Personal Info
 | Language       | Proficiency         |
 | -------------- | ------------------- |
 | English        | Native or Bilingual |
 | Serbian        | Native or Bilingual |
 | Japanese       | Full Professional   |
 | German         | Elementary          |
+
+## Certifications
+
+- Professional Scrum Developer™ I (PSD I)
+- AWS Certified Cloud Practitioner
+- Certified SAFe® 5 DevOpsPractitioner
+
+## Work experience
+
+### Zühlke Group
+#### Advanced Software Engineer
+##### *May 2022 - present (1 year 10 months) -- Belgrade, Serbia*
+
+### Soft Road Apps
+#### Full-stack Developer/Systems Engineer
+##### *January 2020 - September 2021 (1 year 9 months) -- Belgrade, Serbia*
+
+## Project examples
+
+### IoT communication hub solution for company in transporation sector
+##### *May 2022 - September 2022 (5 months)*
+
+IoT hub that co-ordinates and aggregates data from large number of sensors.
+IoT hub administrators could check the data sent from the sensors in chronological order, check sensor health and restart and shut down sensors.
+Administrators are informed of suspicious behaviour of malfunctioning sensors. 
+Solution needed to be highly-available and fault-tolerant while preserving high degrees of chronologic data integrity.
+IoT hub was throughly stress tested for precision and performance issues. 
+
+##### **Tasks**: Software development
+##### **Technologies used**: Java, PostgreSQL, React
+
+### eFrontInvest solutions for multiple clients in the financial sector
+##### *May 2020 - September 2021 (1 year 5 months)*
+
+Leveraging eFrontInvest software to create various dashboards and data visualisations for the clients.
+Creating manual testing plans to confirm implementation correctness according to clients' requirements.
+Creating technical specifications and documentation for the implemented solutions.
+Designing and developing solutions according to technical specifications/designs.
+Designing and developing screens, layouts and dashboards that meet specifications.
+Maintaining documentation of implemented solutions for future reference and creation of training material for onboarding new team members.
+Handling all communication with the eFrontInvest support teams on behalf of clients.
+Contributing to discussion on improvement of existing systems and processes with the clients.
+
+##### **Tasks**: Software development
+
+##### **Technologies used**: eFrontInvest, FrontScript, JavaScript, MicrosoftExcel
+
+### Classroom booking web application for universities
+##### *January 2020 - April 2020 (4 months) -- Belgrade, Serbia*
+
+Web application used by universities to manage booking classrooms and laboratories on campus.
+Professors and students can find classrooms which are available and reserve them for classes or extra-curricular activities like student clubs.
+University campus management staff can review and approve classroom bookings. 
+
+##### **Tasks**: Software development
+
+##### **Technologies used**: Java, JSP, JavaScript, HTML, CSS
 
 ## Contact
 - Email: [dragojevic.u@gmail.com](mailto:dragojevic.u@gmail.com)
