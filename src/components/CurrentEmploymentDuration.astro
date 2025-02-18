@@ -1,16 +1,16 @@
 ---
-const { startYear, startMonth } = Astro.props;
+const { id, startYear, startMonth } = Astro.props;
 ---
 
-<span id="duration"></span>
+<span id={id}></span>
 
-<script is:inline define:vars={{ startYear, startMonth }}>
-    const p = document.getElementById("duration");
+<script is:inline define:vars={{ id, startYear, startMonth }}>
+    const p = document.getElementById(id);
     const text = calculateDuration(startYear, startMonth);
-    if (p) {
-        p.textContent = text;
+    if (p && text) {
+        // Hack because of whitespace only text node being appended.
+        p.textContent = " " + text;
     }
-
     function calculateDuration(startYear, startMonth) {
         const nowYear = new Date().getFullYear();
         const nowMonth = new Date().getMonth() + 1;
@@ -18,7 +18,7 @@ const { startYear, startMonth } = Astro.props;
             const diffYear = nowYear - startYear;
             const diffMonth = nowMonth - startMonth;
             if (diffYear > 0) {
-                return ` ${diffYear} ${diffYear === 1 ? "year" : "years"} ${diffMonth} ${diffMonth === 1 ? "month" : "months"}`;
+                return `${diffYear} ${diffYear === 1 ? "year" : "years"} ${diffMonth} ${diffMonth === 1 ? "month" : "months"}`;
             }
         } else if (startMonth === nowMonth) {
             const diffYear = nowYear - startYear;
