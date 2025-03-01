@@ -16,10 +16,10 @@ export async function getStaticPaths() {
 const [, lang] = Astro.url.pathname.split("/");
 const nonDraftPosts = await getCollection(
     "posts",
-    ({ data, slug }) => !data.draft && slug.startsWith(lang)
+    ({ data, slug }) => !data.draft && slug.startsWith(lang),
 );
 const posts = [...nonDraftPosts].sort((a, b) =>
-    a.data.date < b.data.date ? 1 : -1
+    a.data.date < b.data.date ? 1 : -1,
 );
 ---
 

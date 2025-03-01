@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
 
-import tailwind from "@astrojs/tailwind";
 import rehypeCitation from 'rehype-citation';
+import tailwindcss from '@tailwindcss/vite';
 
 const setPostLayout = () => {
   return function (_, file) {
@@ -18,16 +18,19 @@ const setPostLayout = () => {
 export default defineConfig({
   markdown: {
     remarkPlugins: [setPostLayout],
-    rehypePlugins: [[rehypeCitation, {
-      bibliography: []
-    }
-    ]
-    ]
+    rehypePlugins: [[rehypeCitation, { bibliography: [] }]]
   },
-  integrations: [
-    mdx(), tailwind()],
+
+  plugins: [tailwindcss()],
+  integrations: [mdx()],
+
   redirects: {
     '/': '/en/'
   },
+
   site: 'https://blog.urosdragojevic.com',
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
