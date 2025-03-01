@@ -7,7 +7,7 @@ import PostsList from "./PostsList.astro";
 const { data } = Astro.props;
 
 const posts = await Promise.all(
-    data.posts.map(({ slug }) => getEntry("posts", slug)),
+    data.posts.map(({ id }) => getEntry("posts", id)),
 );
 ---
 
